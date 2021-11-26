@@ -18,9 +18,37 @@ let router = new vueRouter({
             component: () => import('./../views/home.vue'),
             children: [
                 {
-                    path: 'userList',
-                    component:()=>import('./../components/user_management/userList.vue')
-                }
+                    path: 'users',
+                    component:()=>import('./../components/yhgl/users.vue')
+                },
+                {
+                    path: 'roles',
+                    component:()=>import('./../components/qxgl/roles.vue')
+                },
+                {
+                    path: 'rights',
+                    component:()=>import('./../components/qxgl/rights.vue')
+                },
+                {
+                    path: 'reports',
+                    component:()=>import('./../components/sjbb/reports.vue')
+                },
+                {
+                    path: 'goods',
+                    component:()=>import('./../components/spgl/goods.vue')
+                },
+                {
+                    path: 'categories',
+                    component:()=>import('./../components/spgl/categories.vue')
+                },
+                {
+                    path: 'params',
+                    component:()=>import('./../components/spgl/params.vue')
+                },
+                {
+                    path: 'orders',
+                    component:()=>import('./../components/ddgl/orders.vue')
+                },
             ]
         }   
     ]
