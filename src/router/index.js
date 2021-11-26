@@ -15,7 +15,7 @@ let router = new vueRouter({
         },
         {
             path: '/home',
-            component: () => import('./../views/home.vue'),
+            component: () => import('./../views/Home.vue'),
             children: [
                 {
                     path: 'users',
