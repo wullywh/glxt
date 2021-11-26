@@ -1,8 +1,8 @@
 <template>
   <div class="box">
     <el-container>
-      <el-header
-        >电商后台管理系统
+      <el-header>
+        电商后台管理系统
         <span @click="exit">退出</span>
       </el-header>
       <el-container>
@@ -19,11 +19,7 @@
               active-text-color="#ffd04b"
               :unique-opened="unique"
             >
-              <el-submenu
-                v-for="item in menus"
-                :key="item.id"
-                :index="item.id + ''"
-              >
+              <el-submenu v-for="item in menus" :key="item.id" :index="item.id + ''">
                 <template slot="title">
                   <i class="el-icon-location"></i>
                   <span>{{ item.authName }}</span>
@@ -175,5 +171,9 @@ export default {
       }
     }
   }
+}
+// 内容区域改变背景色
+.el-main {
+  background-color: #eaedf1;
 }
 </style>
