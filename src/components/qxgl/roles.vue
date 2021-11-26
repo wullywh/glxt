@@ -47,4 +47,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.jues {
+  .el-table_3_column_15 {
+    text-align: center;
+    .cell {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
 </style>

@@ -19,7 +19,11 @@
               active-text-color="#ffd04b"
               :unique-opened="unique"
             >
-              <el-submenu v-for="item in menus" :key="item.id" :index="item.id + ''">
+              <el-submenu
+                v-for="item in menus"
+                :key="item.id"
+                :index="item.id + ''"
+              >
                 <template slot="title">
                   <i class="el-icon-location"></i>
                   <span>{{ item.authName }}</span>
@@ -165,6 +169,8 @@ export default {
     .el-main {
       padding-top: 0;
       background-color: #eaedf1;
+      display: flex;
+      flex-direction: column;
       .el-breadcrumb {
         height: 50px;
         line-height: 50px;
