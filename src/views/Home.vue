@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>后台管理系统</el-header>
       <el-container>
         <el-aside width="200px">
           <el-col :span="12">

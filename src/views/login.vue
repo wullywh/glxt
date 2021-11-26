@@ -35,18 +35,46 @@ export default {
   },
   methods: {
     login_() {
-      //   this.axios.post("http://127.0.0.1:8888/api/private/v1/login", {
-      //     username: this.user,
-      //     password: this.pass,
-      //   });
-      http({
-        url: "/login",
-        method: "post",
-        data: {
-          username: this.user,
-          password: this.pass,
-        },
-      }).then((res) => console.log(res));
+      // 登录验证
+      if (this.user == "") {
+        this.$message({
+          message: "请输入用户名",
+          type: "warning",
+        });
+      }
+      if (this.pass == "") {
+        this.$message({
+          message: "请输入密码",
+          type: "warning",
+        });
+      }
+      if (this.pass != "" && this.user != "") {
+        http({
+          url: "/login",
+          method: "post",
+          data: {
+            username: this.user,
+            password: this.pass,
+          },
+        }).then((res) => {
+          // 登录失败
+          if (res.meta.status == 400) {
+            this.$message.error(res.meta.msg);
+          } else {
+            // 登录成功
+            this.$message({
+              message: res.meta.msg,
+              type: "success",
+            });
+            // 保存token
+            sessionStorage.setItem("token", res.data.token);
+            // 实现跳转，进入主页
+            setTimeout(() => {
+              this.$router.push("/home");
+            }, 2000);
+          }
+        });
+      }
     },
   },
   components: {},
