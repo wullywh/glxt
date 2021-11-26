@@ -18,6 +18,10 @@ let router = new vueRouter({
             component: () => import('./../views/home.vue'),
             children: [
                 {
+                    path: '/',
+                    component: () => import('./../components/home/index.vue')
+                },
+                {
                     path: 'users',
                     component:()=>import('./../components/yhgl/users.vue')
                 },

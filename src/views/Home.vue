@@ -33,7 +33,7 @@
                     :index="ite.id + ''"
                     v-for="ite in item.children"
                     :key="ite.id"
-                    @click="go_(ite.path)"
+                    @click="go_(ite.path, ite.authName)"
                   >
                     {{ ite.authName }}</el-menu-item
                   >
@@ -43,7 +43,17 @@
           </el-col>
         </el-aside>
         <el-main>
-          <h3 v-if="iswellcom">wellcome</h3>
+          <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/home' }"
+              >首页</el-breadcrumb-item
+            >
+            <el-breadcrumb-item v-show="path_1">{{
+              path_1
+            }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-show="path_2">{{
+              path_2
+            }}</el-breadcrumb-item>
+          </el-breadcrumb>
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -60,22 +70,53 @@ export default {
       menus: [],
       unique: true,
       iswellcom: true,
+      path_1: "",
+      path_2: "",
     };
   },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
+      let a = this.menus.filter((item) => {
+        return item.id == key;
+      });
+      console.log(a);
+      this.path_1 = a[0].authName;
+      this.path_2 = "";
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    go_(v) {
+    go_(v, t) {
       this.iswellcom = false;
       this.$router.push(`/home/${v}`);
+      this.path_2 = t;
     },
-    exit(){
-      
-    }
+    exit() {
+      // 退出登录消息提示
+      this.$confirm("是否退出登录?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "退出成功",
+          });
+          // 执行退出登录操作
+          setTimeout(() => {
+            sessionStorage.removeItem("token");
+            this.$router.push("/login");
+          }, 2000);
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消退出",
+          });
+        });
+    },
   },
   components: {},
   created() {
@@ -123,6 +164,14 @@ export default {
       }
       .el-col {
         width: 100%;
+      }
+    }
+    .el-main {
+      padding-top: 0;
+      background-color: #eaedf1;
+      .el-breadcrumb {
+        height: 50px;
+        line-height: 50px;
       }
     }
   }

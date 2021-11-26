@@ -57,6 +57,7 @@ export default {
             password: this.pass,
           },
         }).then((res) => {
+          console.log(res.meta);
           // 登录失败
           if (res.meta.status == 400) {
             this.$message.error(res.meta.msg);
