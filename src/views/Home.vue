@@ -1,16 +1,18 @@
 <template>
   <div class="box">
     <el-container>
+      <!-- hearder -->
       <el-header>
         电商后台管理系统
         <span @click="exit">退出</span>
       </el-header>
       <el-container>
+        <!-- 侧边栏 -->
         <el-aside width="200px">
           <h4>|||</h4>
           <el-col :span="12">
             <el-menu
-              default-active="2"
+              :default-active="da_index"
               class="el-menu-vertical-demo"
               @open="handleOpen"
               @close="handleClose"
@@ -18,7 +20,9 @@
               text-color="#fff"
               active-text-color="#ffd04b"
               :unique-opened="unique"
+              :router="true"
             >
+              <!-- 一级菜单 -->
               <el-submenu
                 v-for="item in menus"
                 :key="item.id"
@@ -29,31 +33,24 @@
                   <span>{{ item.authName }}</span>
                 </template>
                 <el-menu-item-group>
+                  <!-- 二级菜单 -->
                   <el-menu-item
-                    :index="ite.id + ''"
                     v-for="ite in item.children"
+                    :index="'/' + ite.path"
                     :key="ite.id"
-                    @click="go_(ite.path, ite.authName)"
+                    @click="default_active('/' + ite.path)"
+                    :route="{ path: '/home/' + ite.path }"
                   >
-                    {{ ite.authName }}</el-menu-item
+                    <i class="el-icon-menu"></i>
+                    <span slot="title">{{ ite.authName }}</span></el-menu-item
                   >
                 </el-menu-item-group>
               </el-submenu>
             </el-menu>
           </el-col>
         </el-aside>
+        <!-- 菜单对应内容区域 -->
         <el-main>
-          <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item :to="{ path: '/home' }"
-              >首页</el-breadcrumb-item
-            >
-            <el-breadcrumb-item v-show="path_1">{{
-              path_1
-            }}</el-breadcrumb-item>
-            <el-breadcrumb-item v-show="path_2">{{
-              path_2
-            }}</el-breadcrumb-item>
-          </el-breadcrumb>
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -70,11 +67,17 @@ export default {
       menus: [],
       unique: true,
       iswellcom: true,
-      path_1: "",
-      path_2: "",
+      // 当前激活项
+      da_index: "",
     };
   },
   methods: {
+    // 保存激活菜单的index值
+    default_active(index) {
+      console.log(index);
+      this.da_index = index;
+      sessionStorage.setItem("index", index);
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
       let a = this.menus.filter((item) => {
@@ -125,14 +128,20 @@ export default {
       this.menus = res.data;
     });
   },
+  mounted() {
+    this.da_index = sessionStorage.getItem("index");
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .box {
   height: 100%;
-  .el-container {
+  > .el-container {
+    display: flex;
     height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
     .el-header {
       background-color: #373d41;
       line-height: 60px;
@@ -152,34 +161,91 @@ export default {
         line-height: 40px;
       }
     }
-    .el-aside {
-      background-color: #333744;
-      h4 {
-        font-size: 16px;
-        background-color: #4a5064;
-        color: #fff;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
+    .el-container {
+      .el-aside {
+        height: 100%;
+        background-color: #333744;
+        h4 {
+          font-size: 16px;
+          background-color: #4a5064;
+          color: #fff;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+        }
+        .el-col {
+          width: 100%;
+          background-color: #333744;
+          .el-menu {
+            border-right: none;
+          }
+        }
       }
-      .el-col {
-        width: 100%;
-      }
-    }
-    .el-main {
-      padding-top: 0;
-      background-color: #eaedf1;
-      display: flex;
-      flex-direction: column;
-      .el-breadcrumb {
-        height: 50px;
-        line-height: 50px;
+      .el-main {
+        padding-top: 0;
+        background-color: #eaedf1;
+        height: 100%;
       }
     }
   }
 }
-// 内容区域改变背景色
-.el-main {
-  background-color: #eaedf1;
-}
+// .box {
+//   height: 100%;
+//   .el-container {
+//     height: 100%;
+//     .el-header {
+//       background-color: #373d41;
+//       line-height: 60px;
+//       color: #fff;
+//       font-size: 20px;
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       span {
+//         width: 70px;
+//         height: 40px;
+//         background-color: #909399;
+//         border-radius: 6px;
+//         color: #fff;
+//         font-size: 16px;
+//         text-align: center;
+//         line-height: 40px;
+//       }
+//     }
+//     .el-aside {
+//       background-color: #333744;
+//       h4 {
+//         font-size: 16px;
+//         background-color: #4a5064;
+//         color: #fff;
+//         height: 30px;
+//         line-height: 30px;
+//         text-align: center;
+//       }
+//       .el-col {
+//         width: 100%;
+//       }
+//     }
+//     .el-container {
+//       flex-grow: 1;
+//       box-sizing: border-box;
+//     }
+//     .el-main {
+//       height: 100%;
+//       box-sizing: border-box;
+//       padding-top: 0;
+//       background-color: #eaedf1;
+//       display: flex;
+//       flex-direction: column;
+//       .el-breadcrumb {
+//         height: 50px;
+//         line-height: 50px;
+//       }
+//     }
+//   }
+// }
+// // 内容区域改变背景色
+// .el-main {
+//   background-color: #eaedf1;
+// }
 </style>

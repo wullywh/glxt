@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="./../assets/logo.png" />
       </div>
-      <form class="from">
+      <form class="from" @submit="login_">
         <p>
           <i class="el-icon-s-custom"></i>
           <input type="text" placeholder="用户名" v-model="user" />
@@ -15,7 +15,7 @@
         </p>
 
         <div>
-          <button class="dengl" @click="login_">登录</button>
+          <button class="dengl">登录</button>
           <button class="reset">重置</button>
         </div>
       </form>

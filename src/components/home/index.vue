@@ -10,6 +10,9 @@ export default {
   },
   methods: {},
   components: {},
+  mounted() {
+    sessionStorage.removeItem("index");
+  },
 };
 </script>
 
