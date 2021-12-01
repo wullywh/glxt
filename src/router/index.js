@@ -25,7 +25,7 @@ let router = new vueRouter({
                 },
                 {
                     path: 'roles',
-                    component: () => import('./../components/qxgl/roles.vue')
+                    component:()=>import('./../components/qxgl/roles1.vue')
                 },
                 {
                     path: 'rights',

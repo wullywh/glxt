@@ -94,7 +94,7 @@
                 </el-tab-pane>
                 <!-- 商品内容 -->
                 <el-tab-pane label="商品内容">
-                    <!-- <quill-editor v-model="addForm.goods_introduce"></quill-editor> -->
+                    <quill-editor v-model="addForm.goods_introduce"></quill-editor>
                     <el-button type="primary" @click="add_go">添加商品</el-button>
                 </el-tab-pane>
             </el-tabs>
@@ -104,6 +104,10 @@
 
 <script>
 import http from '../http/index'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 export default {
     props: {
 
