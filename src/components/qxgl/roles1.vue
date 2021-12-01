@@ -19,11 +19,12 @@
               v-for="item1 in scope.row.children"
               :key="item1.id"
               class="centerRow"
-              @close="removeRight(scope.row, item1.id)"
             >
               <!-- 这一列，专门渲染 一级权限 -->
               <el-col :span="5" height="100%">
-                <el-tag closable>{{ item1.authName }}</el-tag>
+                <el-tag closable @close="removeRight(scope.row, item1.id)">{{
+                  item1.authName
+                }}</el-tag>
                 <i class="el-icon-caret-right"></i>
               </el-col>
               <!-- 还剩余 19 列，分配给二三级权限 -->
@@ -34,13 +35,15 @@
                   :key="item2.id"
                   class="centerRow"
                   border
-                  @close="removeRight(scope.row, item2.id)"
                 >
                   <!-- 放二级权限 -->
                   <el-col :span="6">
-                    <el-tag closable type="success">{{
-                      item2.authName
-                    }}</el-tag>
+                    <el-tag
+                      closable
+                      type="success"
+                      @close="removeRight(scope.row, item2.id)"
+                      >{{ item2.authName }}</el-tag
+                    >
                     <i class="el-icon-caret-right"></i>
                   </el-col>
                   <!-- 放三级权限 -->
@@ -170,7 +173,7 @@ export default {
     },
     // 角色编辑事件
     quer(row) {
-      this.isshow = true;
+      this.isshowj = true;
       this.bianj_id = row.id;
       //   console.log(this.bianj_id);
     },
