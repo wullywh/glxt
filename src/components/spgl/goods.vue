@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <div class="table">
       <!-- 搜索查找框 -->
-      <div style="margin-top: 15px">
+      <div style="margin: 15px 0 15px 0">
         <el-input
           placeholder="请输入内容"
           v-model="query"
@@ -270,14 +270,16 @@ export default {
     line-height: 50px;
   }
   .table {
+    margin-top: 10px;
     background: white;
     padding: 10px 20px 20px 20px;
+    //搜索框
+    .el-select .el-input {
+      width: 130px;
+    }
   }
 }
-//搜索框
-.el-select .el-input {
-  width: 130px;
-}
+
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
