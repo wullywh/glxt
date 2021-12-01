@@ -17,6 +17,11 @@ let router = new vueRouter({
         component: () => import('./../views/Home.vue'),
         children: [{
             path: '/',
+            // component: () => import('./../components/home/index.vue')
+            redirect: 'index'
+        },
+        {
+            path: 'index',
             component: () => import('./../components/home/index.vue')
         },
         {
@@ -49,18 +54,7 @@ let router = new vueRouter({
         },
         {
             path: 'params',
-            component: () => import('./../components/spgl/params.vue'),
-            children: [
-
-                {
-                    path: 'dynamic',
-                    component: () => import('./../components/spgl/dynamic.vue'),
-                },
-                {
-                    path: 'statics',
-                    component: () => import('./../components/spgl/statics.vue'),
-                },
-            ]
+            component: () => import('./../components/spgl/params.vue')
         },
         {
             path: 'orders',
@@ -69,6 +63,23 @@ let router = new vueRouter({
         ]
     }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.path == '/home' && !sessionStorage.getItem('token')) {
+        next('/login')
+    } else {
+        next()
+        if (to.path == '/home/index') {
+            sessionStorage.removeItem('index')
+
+            // router.go(0)
+        }
+    }
+    // else if (to.path == 'index') {
+    //     sessionStorage.removeItem('index')
+    //  }
+
 })
 
 export default router

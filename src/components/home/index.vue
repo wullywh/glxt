@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  // inject: ["reload"],
   props: {},
   data() {
     return {};
@@ -12,6 +13,7 @@ export default {
   components: {},
   mounted() {
     sessionStorage.removeItem("index");
+    // location.reload();
   },
 };
 </script>

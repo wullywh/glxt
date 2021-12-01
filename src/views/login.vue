@@ -79,6 +79,9 @@ export default {
     },
   },
   components: {},
+  // beforeRouteLeave(to, from, next) {
+  //   // if(to.path=='/home' ){}
+  // },
 };
 </script>
 
