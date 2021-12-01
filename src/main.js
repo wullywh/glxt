@@ -30,6 +30,10 @@ Vue.filter('dateFormat', (dataStr) => {
 // 引入element-ui组件库
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// 引入富文本框
+import VueQuillEditor from 'vue-quill-editor'
+
+Vue.use(VueQuillEditor)
 
 Vue.use(ElementUI);
 

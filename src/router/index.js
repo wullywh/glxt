@@ -4,20 +4,18 @@ import vueRouter from 'vue-router'
 Vue.use(vueRouter)
 
 let router = new vueRouter({
-    routes: [
-        {
+    routes: [{
             path: '/',
-            redirect:'/login'
+            redirect: '/login'
         },
         {
             path: '/login',
-            component:()=>import('./../views/login.vue')
+            component: () => import('./../views/login.vue')
         },
         {
             path: '/home',
             component: () => import('./../views/Home.vue'),
-            children: [
-                {
+            children: [{
                     path: '/',
                     // component: () => import('./../components/home/index.vue')
                     redirect:'index'
@@ -28,7 +26,7 @@ let router = new vueRouter({
                 },
                 {
                     path: 'users',
-                    component:()=>import('./../components/yhgl/users.vue')
+                    component: () => import('./../components/yhgl/users.vue')
                 },
                 {
                     path: 'roles',
@@ -36,30 +34,34 @@ let router = new vueRouter({
                 },
                 {
                     path: 'rights',
-                    component:()=>import('./../components/qxgl/rights.vue')
+                    component: () => import('./../components/qxgl/rights.vue')
                 },
                 {
                     path: 'reports',
-                    component:()=>import('./../components/sjbb/reports.vue')
+                    component: () => import('./../components/sjbb/reports.vue')
                 },
                 {
                     path: 'goods',
-                    component:()=>import('./../components/spgl/goods.vue')
+                    component: () => import('./../components/spgl/goods.vue')
+                },
+                {
+                    path: 'addgoods',
+                    component: () => import('./../components/spgl/addgoods.vue'),
                 },
                 {
                     path: 'categories',
-                    component:()=>import('./../components/spgl/categories.vue')
+                    component: () => import('./../components/spgl/categories.vue')
                 },
                 {
                     path: 'params',
-                    component:()=>import('./../components/spgl/params.vue')
+                    component: () => import('./../components/spgl/params.vue')
                 },
                 {
                     path: 'orders',
-                    component:()=>import('./../components/ddgl/orders.vue')
+                    component: () => import('./../components/ddgl/orders.vue')
                 },
             ]
-        }   
+        }
     ]
 })
 
