@@ -72,6 +72,7 @@ router.beforeEach((to,from,next) => {
         next()
         if (to.path == '/home/index') {
             sessionStorage.removeItem('index')
+            
             // router.go(0)
          }
     }

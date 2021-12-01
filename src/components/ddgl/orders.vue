@@ -13,7 +13,11 @@
           v-model="input"
           class="input-with-select"
         >
-          <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-button
+            slot="append"
+            icon="el-icon-search"
+            @click="search_"
+          ></el-button>
         </el-input>
       </div>
       <template>
@@ -268,6 +272,7 @@ export default {
       http({
         url: "/orders",
         params: {
+          query: this.input,
           pagenum: this.feny_data.pagenum,
           pagesize: this.feny_data.pagesize,
         },
@@ -275,6 +280,13 @@ export default {
         this.tableData = res.data.goods;
         this.total_dingd = res.data.total - 0;
       });
+    },
+    // 搜索订单
+    search_() {
+      if (this.input !== "") {
+        console.log(this.input);
+        this.axios_dingd();
+      }
     },
     // 查看订单物流状态
     look_address() {
